@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" xmlns:th="http://www/thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -18,6 +19,8 @@
 
 </head>
 <body>
+<p th:value="${nume1}"></p>
+
 <!--================Login Box Area =================-->
 <section class="login_box_area section-margin">
     <div class="container">
@@ -25,31 +28,39 @@
             <div class="col-lg-12">
                 <div class="login_form_inner register_form_inner">
                     <h3>Add a product</h3>
-                    <form class="row login_form" action="/addProduct" method="post" id="register_form">
+
+                    <form th:object="${productDto}" class="row login_form" action="/addProduct" method="post"
+                          id="register_form">
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="productName" name="productName"
+                            <input th:field="*{name}" type="text" class="form-control" id="productName"
+                                   name="productName"
                                    placeholder="Product name" onfocus="this.placeholder = ''"
                                    onblur="this.placeholder = 'Product name'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="price" name="price" placeholder="Price"
+                            <input th:field="*{price}" type="text" class="form-control" id="price" name="price"
+                                   placeholder="Price"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="category" name="category" placeholder="Category"
+                            <input th:field="*{category}" type="text" class="form-control" id="category" name="category"
+                                   placeholder="Category"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Category'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="quntity" name="quantity" placeholder="Quantity"
+                            <input th:field="*{quantity}" type="text" class="form-control" id="quntity" name="quantity"
+                                   placeholder="Quantity"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Quantity'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="description" name="description"
+                            <input th:field="*{description}" type="text" class="form-control" id="description"
+                                   name="description"
                                    placeholder="Description" onfocus="this.placeholder = ''"
                                    onblur="this.placeholder = 'Description'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <button type="submit" value="submit" class="button button-register w-100">Add product</button>
+                            <button type="submit" value="submit" class="button button-register w-100">Add product
+                            </button>
                         </div>
                     </form>
                 </div>
