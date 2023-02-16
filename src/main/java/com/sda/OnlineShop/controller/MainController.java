@@ -8,11 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Controller
 public class MainController {
     @Autowired
     private ProductService productService;
+
     @GetMapping("/addProduct")
     public String addProductGet(Model model) {
         ProductDto productDto = new ProductDto();
@@ -21,11 +26,20 @@ public class MainController {
     }
 
     @PostMapping("/addProduct")
-    public String addProductPost(@ModelAttribute ProductDto productDto){
+    public String addProductPost(@ModelAttribute ProductDto productDto,
+                                 @RequestParam("productImage") MultipartFile productImage) {
         System.out.println("S-a apelat add product!");
         System.out.println(productDto);
-        productService.addProduct(productDto);
+        productService.addProduct(productDto, productImage);
         return "addProduct";
+    }
+
+    @GetMapping("/home")
+    public String homeGet(Model model) {
+        List<ProductDto> productDtos = productService.getAllProductDtos();
+        model.addAttribute("productDtos", productDtos);
+
+        return "home";
     }
 
 }
