@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www/thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Product</title>
 
     <link rel="icon" href="img/Fevicon.png" type="image/png">
     <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
@@ -30,7 +30,7 @@
                     <h3>Add a product</h3>
 
                     <form th:object="${productDto}" class="row login_form" action="/addProduct" method="post"
-                          id="register_form">
+                          id="register_form" enctype="multipart/form-data">
                         <div class="col-md-12 form-group">
                             <input th:field="*{name}" type="text" class="form-control" id="productName"
                                    name="productName"
@@ -58,6 +58,12 @@
                                    placeholder="Description" onfocus="this.placeholder = ''"
                                    onblur="this.placeholder = 'Description'">
                         </div>
+
+                        <div class="col-md-12 form-group">
+                            <input type="file" class="form-control" id="productImage"
+                                   name="productImage">
+                        </div>
+
                         <div class="col-md-12 form-group">
                             <button type="submit" value="submit" class="button button-register w-100">Add product
                             </button>

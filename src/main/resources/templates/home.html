@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <link rel="icon" href="img/Fevicon.png" type="image/png">
+    <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="vendors/linericon/style.css">
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
+    <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+</head>
+<body>
+
+<!-- ================ trending product section start ================= -->
+<section class="section-margin calc-60px">
+    <div class="container">
+        <div class="section-intro pb-60px">
+            <p>Available products</p>
+        </div>
+        <div class="row">
+            <div th:each="productDto:${productDtos}" class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card text-center card-product">
+                    <div class="card-product__img">
+                        <img class="card-img" th:src="${'data:image/png; base64, ' + productDto.image}" alt="">
+                        <ul class="card-product__imgOverlay">
+                            <li>
+                                <button><i class="ti-search"></i></button>
+                            </li>
+                            <li>
+                                <button><i class="ti-shopping-cart"></i></button>
+                            </li>
+                            <li>
+                                <button><i class="ti-heart"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <p th:text = "${productDto.category}"></p>
+                        <h4 class="card-product__title"><a th:text="${productDto.name}" href="single-product.html"></a></h4>
+                        <p th:text="${'$' + productDto.price}" class="card-product__price"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ================ trending product section end ================= -->
+
+</body>
+</html>
