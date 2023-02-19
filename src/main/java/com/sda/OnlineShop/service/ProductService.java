@@ -22,9 +22,6 @@ public class ProductService {
 
         Product product = productMapper.map(productDto, productImage);
         productRepository.save(product);
-
-
-
     }
 
     public List<ProductDto> getAllProductDtos() {
