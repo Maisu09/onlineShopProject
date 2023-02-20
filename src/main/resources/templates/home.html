@@ -82,7 +82,7 @@
                     </div>
                     <div class="card-body">
                         <p th:text = "${productDto.category}"></p>
-                        <h4 class="card-product__title"><a th:text="${productDto.name}" href="single-product.html"></a></h4>
+                        <h4 class="card-product__title"><a th:text="${productDto.name}" th:href="@{/product/{x}(x=${productDto.id})}"></a></h4>
                         <p th:text="${'$' + productDto.price}" class="card-product__price"></p>
                     </div>
                 </div>
