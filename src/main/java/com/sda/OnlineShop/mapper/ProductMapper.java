@@ -32,7 +32,7 @@ public class ProductMapper {
         productDto.setCategory(product.getCategory());
         productDto.setQuantity(String.valueOf(product.getQuantity()));
         productDto.setDescription(product.getDescription());
-
+        productDto.setId(String.valueOf(product.getProductId()));
         return productDto;
     }
 
