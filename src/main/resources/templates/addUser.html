@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+
+    <link rel="icon" href="img/Fevicon.png" type="image/png">
+    <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="vendors/linericon/style.css">
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
+    <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+</head>
+<body>
+<p th:value="${nume1}"></p>
+
+<!--================Login Box Area =================-->
+<section class="login_box_area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="login_form_inner register_form_inner">
+                    <h3>Register user</h3>
+
+                    <form th:object="${userDto}" class="row login_form" action="/addUser" method="post"
+                          id="register_form" enctype="multipart/form-data">
+
+                        <div class="col-md-12 form-group">
+                            <input th:field="*{username}" type="text" class="form-control" id="username" name="username"
+                                   placeholder="Username"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <input th:field="*{email}" type="text" class="form-control" id="email"
+                                   name="email"
+                                   placeholder="E-mail" onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = 'E-mail'">
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <input th:field="*{password}" type="text" class="form-control" id="password" name="password"
+                                   placeholder="Password"
+                                   onfocus="this.placeholder = 'Password'" onblur="this.placeholder = 'Password'">
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="button button-register w-100">Add User
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!--================End Login Box Area =================-->
+</body>
+
+</html>
+
+</body>
+</html>
