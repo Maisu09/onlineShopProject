@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    @Autowired
+
     private ProductMapper productMapper;
     @Autowired
     private ProductRepository productRepository;

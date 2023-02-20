@@ -42,4 +42,8 @@ public class MainController {
         return "home";
     }
 
+    @GetMapping("/cart")
+    public String cartGet() {
+        return "cart";
+    }
 }
