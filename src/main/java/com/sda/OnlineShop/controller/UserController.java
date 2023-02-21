@@ -32,6 +32,7 @@ public class UserController {
         userService.addUser(userDto);
 
         return "addUser";
+
     }
 
 }

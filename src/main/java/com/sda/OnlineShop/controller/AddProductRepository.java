@@ -1,7 +1,6 @@
 package com.sda.OnlineShop.controller;
 
 import com.sda.OnlineShop.dto.ProductDto;
-import com.sda.OnlineShop.entities.Product;
 import com.sda.OnlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,11 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Optional;
-
 @Controller
-public class MainController {
+public class AddProductRepository {
     @Autowired
     private ProductService productService;
 
@@ -33,34 +29,11 @@ public class MainController {
         return "addProduct";
     }
 
-    @GetMapping("/home")
-    public String homeGet(Model model) {
-        List<ProductDto> productDtos = productService.getAllProductDtos();
-        model.addAttribute("productDtos", productDtos);
-
-        return "home";
-    }
-
     @GetMapping("/cart")
     public String cartGet() {
         return "cart";
     }
 
-    @GetMapping("/product/{productId}")
-    public String viewProductGet(
-            Model model,
-            @PathVariable(value = "productId") String productId
-    ) {
-        Optional<ProductDto> optionalProductDto = productService.getOptionalProductDtoById(productId);
 
-        if (optionalProductDto.isEmpty())
-        {
-            return "error";
-        }
-
-        model.addAttribute("productDto", optionalProductDto.get());
-        System.out.println("Am dat click pe prod cu id: " + productId);
-        return "viewProduct";
-    }
 
 }
