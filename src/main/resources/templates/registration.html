@@ -49,13 +49,14 @@
                         <div class="col-md-12 form-group">
                             <input th:field="*{emailAddress}" type="text" class="form-control" id="email" name="email" placeholder="Email Address"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
+                            <p th:each="error : ${#fields.errors('emailAddress')}" th:text="${error}"></p>
                         </div>
                         <div class="col-md-12 form-group">
-                            <input th:field="*{password}" type="text" class="form-control" id="password" name="password" placeholder="Password"
+                            <input th:field="*{password}" type="password" class="form-control" id="password" name="password" placeholder="Password"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input th:field="*{confirmPassword}" type="text" class="form-control" id="confirmPassword" name="confirmPassword"
+                            <input th:field="*{confirmPassword}" type="password" class="form-control" id="confirmPassword" name="confirmPassword"
                                    placeholder="Confirm Password" onfocus="this.placeholder = ''"
                                    onblur="this.placeholder = 'Confirm Password'">
                         </div>
