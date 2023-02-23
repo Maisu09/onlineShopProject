@@ -23,6 +23,18 @@ public class RegistrationDtoValidator {
             FieldError fieldError = new FieldError("registrationDto", "emailAddress", "The email is already in use");
             bindingResult.addError(fieldError);
         }
+
+        if (!(registrationDto.getPassword().equals(registrationDto.getConfirmPassword()))) {
+            FieldError fieldError = new FieldError("registrationDto", "confirmPassword", "The passwords do not match");
+            bindingResult.addError(fieldError);
+
+
+
+        }
+
     }
+
+
+
 
 }
