@@ -23,6 +23,7 @@ public class SecurityConfig {
             auth.requestMatchers("/registration").permitAll();
             auth.requestMatchers("/home", "/product/**").hasAnyRole("BUYER", "SELLER");
             auth.requestMatchers("/addProduct").hasRole("SELLER");
+            auth.requestMatchers("/checkout").hasRole("BUYER");
         }).httpBasic();
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests().and()
@@ -33,7 +34,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/img/**", "/css/**", "/vendors/**", "/js/**");
+        return (web) -> web.ignoring().requestMatchers("/img/**", "/css/**", "/vendors/**", "/js/**", "/error");
     }
 
 }
