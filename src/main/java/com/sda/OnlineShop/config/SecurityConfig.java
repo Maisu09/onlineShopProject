@@ -11,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -20,19 +21,19 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/registration").permitAll();
-            auth.requestMatchers("/addProduct").permitAll();
-            auth.requestMatchers("/home").permitAll();
-
+            auth.requestMatchers("/home", "/product/**").hasAnyRole("BUYER", "SELLER");
+            auth.requestMatchers("/addProduct").hasRole("SELLER");
         }).httpBasic();
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests().and()
                 .cors().disable().authorizeHttpRequests().and()
-                .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home");
+                .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home", true);
         return httpSecurity.build();
     }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/img/**", "/css/**", "/js/**", "/vendors/**");
+        return (web) -> web.ignoring().requestMatchers("/img/**", "/css/**", "/vendors/**", "/js/**");
     }
+
 }

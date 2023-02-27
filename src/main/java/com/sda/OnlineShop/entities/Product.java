@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -21,5 +23,8 @@ public class Product {
     @Lob
     @Column(columnDefinition = "BLOB")
     private byte[] image;
+
+    @OneToMany(mappedBy = "product")
+    private List<SelectedProduct> selectedProduct;
 
 }

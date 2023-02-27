@@ -1,6 +1,7 @@
 package com.sda.OnlineShop.controller;
 
 import com.sda.OnlineShop.dto.ProductDto;
+import com.sda.OnlineShop.dto.SelectedProductDto;
 import com.sda.OnlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,20 +15,20 @@ public class ViewProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/product/{productId}")
-    public String viewProductGet(
-            Model model,
-            @PathVariable(value = "productId") String productId
-    ) {
+    @GetMapping("/product/{name}/{productId}")
+    public String viewProductGet(Model model,
+                                 @PathVariable(value = "productId") String productId,
+                                 @PathVariable(value = "name") String name)
+    {
         Optional<ProductDto> optionalProductDto = productService.getOptionalProductDtoById(productId);
-
-        if (optionalProductDto.isEmpty())
-        {
+        if (optionalProductDto.isEmpty()) {
             return "error";
         }
-
         model.addAttribute("productDto", optionalProductDto.get());
-        System.out.println("Am dat click pe prod cu id: " + productId);
+
+        SelectedProductDto selectedProductDto = new SelectedProductDto();
+        model.addAttribute("selectedProductDto", selectedProductDto);
+
         return "viewProduct";
     }
 }
