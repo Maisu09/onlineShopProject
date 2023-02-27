@@ -26,7 +26,7 @@ public class AddProductRepository {
         System.out.println("S-a apelat add product!");
         System.out.println(productDto);
         productService.addProduct(productDto, productImage);
-        return "addProduct";
+        return "redirect:/addProduct";
     }
 
     @GetMapping("/cart")
