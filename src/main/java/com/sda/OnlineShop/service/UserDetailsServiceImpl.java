@@ -21,16 +21,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepository.findByEmailAddress(emailAddress); /// cautam user in baza de date
-        if (optionalUser.isEmpty()) {
-            throw new UsernameNotFoundException(emailAddress); // daca nu gasim user
+        Optional<User> optionalUser = userRepository.findByEmailAddress(emailAddress);  // search in database the user by e-mail
+
+        if (optionalUser.isEmpty()) {  // if cannot fount the exception is thrown
+            throw new UsernameNotFoundException(emailAddress);
         }
-        User user = optionalUser.get();
-        Set<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(user.getUserRole().name())); // pregatim colectia(set) in care o punem userului gasit
-
-
-        return new org.springframework.security.core.userdetails.User(emailAddress, user.getPassword(), roles);
-        //instantiem obiectul User din Spring Sec
+        User user = optionalUser.get();  // if the user exist, we unpacked the box
+        Set<GrantedAuthority> roles = new HashSet<>();  // preparing the collection in which we'll put the user roles and add the user role because we only have one
+        roles.add(new SimpleGrantedAuthority(user.getUserRole().name()));
+        return new org.springframework.security.core.userdetails.User(emailAddress, user.getPassword(),roles);  // we instantiate the user object from spring security
     }
 }

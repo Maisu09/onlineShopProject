@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RegistrationService {
-
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private UserMapper userMapper;
-    public void addRegistration(RegistrationDto registrationDto) {
 
+
+    public void addRegistration(RegistrationDto registrationDto) {
         User user = userMapper.map(registrationDto);
         userRepository.save(user);
-
     }
-
 }
+

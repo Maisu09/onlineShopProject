@@ -19,28 +19,26 @@ public class ShoppingCartMapper {
         ShoppingCartDto shoppingCartDto = new ShoppingCartDto();
         List<SelectedProductDto> selectedProductDtoList = createSelectedProductDtoList(shoppingCart);
 
-        Integer subTotal = computeSubtotal(selectedProductDtoList);
+        Integer subtotal = computeSubtotal(selectedProductDtoList);
 
         shoppingCartDto.setSelectedProductDtos(selectedProductDtoList);
-        shoppingCartDto.setSubtotal(String.valueOf(subTotal));
-        shoppingCartDto.setShipping("50");
-        shoppingCartDto.setTotal(String.valueOf(subTotal + 50));
-
+        shoppingCartDto.setSubtotal(String.valueOf(subtotal));
+        shoppingCartDto.setShipping("50$");
+        shoppingCartDto.setTotal(String.valueOf(subtotal + 50));
         return shoppingCartDto;
     }
 
     private Integer computeSubtotal(List<SelectedProductDto> selectedProductDtoList) {
-        int subTotal = 0;
+        int subtotal = 0;
         for (SelectedProductDto selectedProductDto : selectedProductDtoList) {
             int priceTimesQuantity = Integer.parseInt(selectedProductDto.getPriceTimesQuantity());
-            subTotal = subTotal + priceTimesQuantity;
+            subtotal += priceTimesQuantity;
         }
-        return subTotal;
+        return subtotal;
     }
 
     private List<SelectedProductDto> createSelectedProductDtoList(ShoppingCart shoppingCart) {
         List<SelectedProductDto> selectedProductDtoList = new ArrayList<>();
-
         for (SelectedProduct selectedProduct : shoppingCart.getSelectedProducts()) {
             SelectedProductDto selectedProductDto = selectedProductMapper.map(selectedProduct);
             selectedProductDtoList.add(selectedProductDto);

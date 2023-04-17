@@ -1,5 +1,6 @@
 package com.sda.OnlineShop.mapper;
 
+
 import com.sda.OnlineShop.dto.RegistrationDto;
 import com.sda.OnlineShop.entities.ShoppingCart;
 import com.sda.OnlineShop.entities.User;
@@ -15,16 +16,15 @@ public class UserMapper {
 
     public User map(RegistrationDto registrationDto) {
         User user = new User();
-        user.setPassword(bCryptPasswordEncoder.encode(registrationDto.getPassword()));
-        user.setAddress(registrationDto.getAddress());
         user.setFullName(registrationDto.getFullName());
-        user.setPhoneNumber(registrationDto.getPhoneNumber());
-        user.setUserRole(UserRole.valueOf(registrationDto.getUserRole()));
         user.setEmailAddress(registrationDto.getEmailAddress());
+        user.setPassword(bCryptPasswordEncoder.encode(registrationDto.getPassword()));
+        user.setPhoneNumber(registrationDto.getPhoneNumber());
+        user.setAddress(registrationDto.getAddress());
+        user.setUserRole(UserRole.valueOf(registrationDto.getUserRole()));
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setUser(user);
         user.setShoppingCart(shoppingCart);
-
         return user;
     }
 }

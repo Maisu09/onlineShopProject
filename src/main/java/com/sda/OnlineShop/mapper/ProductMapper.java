@@ -1,5 +1,6 @@
 package com.sda.OnlineShop.mapper;
 
+
 import com.sda.OnlineShop.dto.ProductDto;
 import com.sda.OnlineShop.entities.Product;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -13,15 +14,12 @@ public class ProductMapper {
 
     public Product map(ProductDto productDto, MultipartFile productImage) {
         Product product = new Product();
-
         product.setName(productDto.getName());
-        product.setCategory(productDto.getCategory());
         product.setPrice(Integer.valueOf(productDto.getPrice()));
+        product.setCategory(productDto.getCategory());
         product.setQuantity(Integer.valueOf(productDto.getQuantity()));
         product.setDescription(productDto.getDescription());
         product.setImage(convertToByte(productImage));
-        productDto.setImage(Base64.encodeBase64String(product.getImage()));
-
         return product;
     }
 
@@ -32,6 +30,7 @@ public class ProductMapper {
         productDto.setCategory(product.getCategory());
         productDto.setQuantity(String.valueOf(product.getQuantity()));
         productDto.setDescription(product.getDescription());
+        productDto.setImage(Base64.encodeBase64String(product.getImage()));
         productDto.setId(String.valueOf(product.getProductId()));
         return productDto;
     }
@@ -42,7 +41,5 @@ public class ProductMapper {
         } catch (IOException e) {
             return new byte[0];
         }
-
     }
-
 }
