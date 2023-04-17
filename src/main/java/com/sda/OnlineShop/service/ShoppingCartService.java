@@ -17,51 +17,34 @@ import java.util.Optional;
 @Service
 public class ShoppingCartService {
     @Autowired
-    ProductRepository productRepository;
-
+    private ProductRepository productRepository;
     @Autowired
-    ShoppingCartRepository shoppingCartRepository;
-
+    private ShoppingCartRepository shoppingCartRepository;
     @Autowired
-    SelectedProductRepository selectedProductRepository;
-
+    private SelectedProductRepository selectedProductRepository;
     @Autowired
-    ShoppingCartMapper shoppingCartMapper;
-
-
-    public void addToCart(SelectedProductDto selectedProductDto,
-                          String productId,
-                          String authentificatedUserEmail
-    ) {
+    private ShoppingCartMapper shoppingCartMapper;
+    public void addToCart(SelectedProductDto selectedProductDto, String productId, String authenticatedUserEmail) {
         Optional<Product> optionalProduct = productRepository.findById(Integer.valueOf(productId));
         Product product = optionalProduct.get();
-        ShoppingCart shoppingCart = shoppingCartRepository.findByUserEmailAddress(authentificatedUserEmail);
-        SelectedProduct selectedProduct = new SelectedProduct();
+        ShoppingCart shoppingCart = shoppingCartRepository.findByUserEmailAddress(authenticatedUserEmail);
 
-        selectedProduct.setQuantity(Integer.valueOf(selectedProductDto.getQuantity()));
-        selectedProduct.setProduct(product);
-        selectedProduct.setShoppingCart(shoppingCart);
-
-//        SelectedProduct selectedProduct1 = buildProduct(selectedProductDto, product, shoppingCart);
+        SelectedProduct selectedProduct = buildProduct(selectedProductDto, product, shoppingCart);
         selectedProductRepository.save(selectedProduct);
     }
 
-    private SelectedProduct buildProduct(SelectedProductDto selectedProductDto, Product product, ShoppingCart shoppingCart)
-    {
+    private SelectedProduct buildProduct(SelectedProductDto selectedProductDto, Product product, ShoppingCart shoppingCart) {
         SelectedProduct selectedProduct = new SelectedProduct();
-
         selectedProduct.setQuantity(Integer.valueOf(selectedProductDto.getQuantity()));
         selectedProduct.setProduct(product);
         selectedProduct.setShoppingCart(shoppingCart);
         return selectedProduct;
     }
 
-    public ShoppingCartDto getShoppingCartDto(String authentificatedEmail) {
-        ShoppingCart shoppingCart = shoppingCartRepository.findByUserEmailAddress(authentificatedEmail);
+    public ShoppingCartDto getShoppingCartDto (String authenticatedUserEmail) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findByUserEmailAddress(authenticatedUserEmail);
         ShoppingCartDto shoppingCartDto = shoppingCartMapper.map(shoppingCart);
-
-        return  shoppingCartDto;
-
+        return shoppingCartDto;
 
     }
 }

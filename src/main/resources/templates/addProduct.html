@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Product</title>
+    <title>AddProduct</title>
 
     <link rel="icon" href="img/Fevicon.png" type="image/png">
     <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
@@ -14,95 +14,40 @@
     <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
     <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/custom.css">
-
 </head>
 <body>
-<div th:insert="fragments/menu :: menu" ></div>
-
-<!--&lt;!&ndash;================ Start Header Menu Area =================&ndash;&gt;-->
-<!--<header class="header_area">-->
-<!--    <div class="main_menu">-->
-<!--        <nav class="navbar navbar-expand-lg navbar-light">-->
-<!--            <div class="container">-->
-<!--                &lt;!&ndash;                <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>&ndash;&gt;-->
-<!--                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
-<!--                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                </button>-->
-<!--                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">-->
-<!--                    <ul class="nav navbar-nav menu_nav ml-auto mr-auto">-->
-<!--                        <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>-->
-<!--                        <li class="nav-item submenu dropdown">-->
-<!--                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
-<!--                               aria-expanded="false">Shop</a>-->
-<!--                            &lt;!&ndash;                            <ul class="dropdown-menu">&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>&ndash;&gt;-->
-<!--                            &lt;!&ndash;&lt;!&ndash;                                <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>&ndash;&gt;&ndash;&gt;-->
-<!--                            &lt;!&ndash;&lt;!&ndash;                                <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>&ndash;&gt;&ndash;&gt;-->
-<!--                            &lt;!&ndash;&lt;!&ndash;                                <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>&ndash;&gt;&ndash;&gt;-->
-<!--                            &lt;!&ndash;&lt;!&ndash;                                <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>&ndash;&gt;&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            </ul>&ndash;&gt;-->
-<!--                        </li>-->
-<!--                        <li class="nav-item"><a class="nav-link" href="/addUser">Add User</a></li>-->
-<!--                    </ul>-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--        </nav>-->
-<!--    </div>-->
-<!--</header>-->
-<!--&lt;!&ndash;================ End Header Menu Area =================&ndash;&gt;-->
-
+<div th:insert="fragments/menu :: menu"></div>      <!--here we select menu and give it a name menu-->
 <!--================Login Box Area =================-->
 <section class="login_box_area section-margin">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6" style="margin: 0 auto;">
                 <div class="login_form_inner register_form_inner">
                     <h3>Add a product</h3>
-
-                    <form th:object="${productDto}" class="row login_form" action="/addProduct" method="post"
-                          id="register_form" enctype="multipart/form-data">
+                    <form th:object="${productDto}" class="row login_form" action="/addProduct" method="post" id="register_form" enctype="multipart/form-data">
                         <div class="col-md-12 form-group">
-                            <input th:field="*{name}" type="text" class="form-control" id="productName"
-                                   name="productName"
-                                   placeholder="Product name" onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Product name'">
+                            <input th:field="*{name}" type="text" class="form-control" id="productName" name="productName" placeholder="Product name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Product name'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input th:field="*{price}" type="text" class="form-control" id="price" name="price"
-                                   placeholder="Price"
-                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'">
+                            <input th:field="*{price}" type="text" class="form-control" id="price" name="price" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input th:field="*{category}" type="text" class="form-control" id="category" name="category"
-                                   placeholder="Category"
-                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Category'">
+                            <input th:field="*{category}" type="text" class="form-control" id="category" name="category" placeholder="Category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Category'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input th:field="*{quantity}" type="text" class="form-control" id="quntity" name="quantity"
-                                   placeholder="Quantity"
-                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Quantity'">
+                            <input th:field="*{quantity}" type="text" class="form-control" id="quantity" name="quantity" placeholder="Quantity" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Quantity'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input th:field="*{description}" type="text" class="form-control" id="description"
-                                   name="description"
-                                   placeholder="Description" onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Description'">
+                            <input th:field="*{description}" type="text" class="form-control" id="description" name="description" placeholder="Description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'">
                         </div>
-
                         <div class="col-md-12 form-group">
-                            <input type="file" class="form-control" id="productImage"
-                                   name="productImage">
+                            <input type="file" class="form-control" id="productImage" name="productImage">
                         </div>
-
                         <div class="col-md-12 form-group">
-                            <button type="submit" value="submit" class="button button-register w-100">Add product
-                            </button>
+                            <button type="submit" value="submit" class="button button-register w-100">ADD PRODUCT</button>
                         </div>
                     </form>
                 </div>
@@ -111,5 +56,6 @@
     </div>
 </section>
 <!--================End Login Box Area =================-->
+
 </body>
 </html>

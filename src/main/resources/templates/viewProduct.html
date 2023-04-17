@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ViewProduct</title>
+
 
     <link rel="icon" href="/img/Fevicon.png" type="image/png">
     <link rel="stylesheet" href="/vendors/bootstrap/bootstrap.min.css">
@@ -16,19 +16,18 @@
     <link rel="stylesheet" href="/vendors/nouislider/nouislider.min.css">
 
     <link rel="stylesheet" href="/css/style.css">
-
     <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-<div th:insert="fragments/menu :: menu"></div>
+<div th:insert="~{fragments/menu :: menu}"></div>
 <!--================Single Product Area =================-->
-<div class="product_image_area">
+<div class="product_image_area customize_single_product_area">
     <div class="container">
         <div class="row s_product_inner">
             <div class="col-lg-6">
                 <div class="owl-carousel owl-theme s_Product_carousel">
                     <div class="single-prd-item">
-                        <img class="img-fluid" th:src="${'data:image/png; base64, '+productDto.image}" alt="">
+                        <img class="img-fluid" style="width: 350px" th:src="${'data:image/png; base64, '+productDto.image}" alt="">
                     </div>
                 </div>
             </div>
@@ -42,19 +41,31 @@
 
                     </ul>
                     <p th:text="${productDto.description}"></p>
-                    <div class="product_count">
+
+                    <div class="product_count quantity-customize">
                         <form th:object="${selectedProductDto}" th:action="@{/product/{y}/{x}(x=${productDto.id},y=${productDto.name})}" method="post">
-                            <label for="qty">Quantity:</label>
-                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                    class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
-                            <input th:field="*{quantity}" type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                            <button class="button primary-btn" type="submit">Add to Cart</button>
+                            <div sec:authorize="hasRole('ROLE_BUYER')">
+                                <div class="d-flex align-items-center">
+                                    <label class="qty mr-3">Quantity:</label>
+                                    <div class="form-inline">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-outline-secondary" onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"><i class="ti-plus"></i></button>
+                                            </div>
+                                            <input th:field="*{quantity}" type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="form-control input-text qty" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"><i class="ti-minus"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <button class="btn btn-outline-primary" type="submit">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
-                    <div class="card_area d-flex align-items-center">
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
-                    </div>
+
                 </div>
             </div>
         </div>

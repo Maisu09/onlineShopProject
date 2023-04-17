@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Checkout</title>
 
     <link rel="icon" href="img/Fevicon.png" type="image/png">
     <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
@@ -13,17 +14,16 @@
     <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
     <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/custom.css">
 
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-<div th:insert="fragments/menu :: menu"></div>
-
 <!--================Checkout Area =================-->
+<div th:insert="fragments/menu :: menu"></div>
 <section class="checkout_area section-margin--small">
     <div class="container">
-
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">
@@ -98,28 +98,34 @@
                 <div class="col-lg-4">
                     <div class="order_box">
                         <h2>Your Order</h2>
-                        <ul class="list">
-                            <li><a href="#"><h4>Product <span>Total</span></h4></a></li>
-                            <li><a href="#">Fresh Blackberry <span class="middle">x 02</span> <span
-                                    class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Tomatoes <span class="middle">x 02</span> <span
-                                    class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span
-                                    class="last">$720.00</span></a></li>
-                        </ul>
-                        <ul class="list list_2">
-                            <li><a href="#">Subtotal <span>$2160.00</span></a></li>
-                            <li><a href="#">Shipping <span>Flat rate: $50.00</span></a></li>
-                            <li><a href="#">Total <span>$2210.00</span></a></li>
-                        </ul>
-                        <div class="creat_account">
-                            <input type="checkbox" id="f-option4" name="selector">
-                            <label for="f-option4">I’ve read and accept the </label>
-                            <a href="#">terms & conditions*</a>
-                        </div>
-                        <div class="text-center">
-                            <a class="button button-paypal" href="#">Launch order</a>
-                        </div>
+                        <form method="post" action="/confirmation">
+                            <ul class="list">
+                                <li><a href="#"><h4>Product <span>Total</span></h4></a></li>
+                                <li th:each="selectedProductDto:${shoppingCartDto.selectedProductDtos}">
+                                    <a href="#">
+                                        <span th:text="${selectedProductDto.name}" style="float:left;"></span>
+                                        <span th:text="${'x ' + selectedProductDto.quantity}" class="middle"></span>
+                                        <span th:text="${'$' + selectedProductDto.priceTimesQuantity}"
+                                              class="last"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="list list_2">
+                                <li><a href="#">Subtotal <span th:text="${'$' + shoppingCartDto.subtotal}"></span></a>
+                                </li>
+                                <li><a href="#">Shipping <span>Flat rate: <span
+                                        th:text="${'$' + shoppingCartDto.shipping}"></span></span></a></li>
+                                <li><a href="#">Total <span th:text="${'$' + shoppingCartDto.total}"></span></a></li>
+                            </ul>
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option4" name="selector">
+                                <label for="f-option4">I’ve read and accept the </label>
+                                <a href="#">terms & conditions*</a>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="button button-paypal" href="#">Launch order</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -127,7 +133,6 @@
     </div>
 </section>
 <!--================End Checkout Area =================-->
-
 <script src="/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script src="/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/vendors/skrollr.min.js"></script>
@@ -136,6 +141,5 @@
 <script src="/vendors/jquery.ajaxchimp.min.js"></script>
 <script src="/vendors/mail-script.js"></script>
 <script src="/js/main.js"></script>
-
 </body>
 </html>
