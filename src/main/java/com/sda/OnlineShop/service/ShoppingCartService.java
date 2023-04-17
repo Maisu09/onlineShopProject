@@ -5,6 +5,7 @@ import com.sda.OnlineShop.dto.ShoppingCartDto;
 import com.sda.OnlineShop.entities.Product;
 import com.sda.OnlineShop.entities.SelectedProduct;
 import com.sda.OnlineShop.entities.ShoppingCart;
+import com.sda.OnlineShop.mapper.ShoppingCartMapper;
 import com.sda.OnlineShop.repository.ProductRepository;
 import com.sda.OnlineShop.repository.SelectedProductRepository;
 import com.sda.OnlineShop.repository.ShoppingCartRepository;
@@ -24,6 +25,10 @@ public class ShoppingCartService {
     @Autowired
     SelectedProductRepository selectedProductRepository;
 
+    @Autowired
+    ShoppingCartMapper shoppingCartMapper;
+
+
     public void addToCart(SelectedProductDto selectedProductDto,
                           String productId,
                           String authentificatedUserEmail
@@ -37,6 +42,7 @@ public class ShoppingCartService {
         selectedProduct.setProduct(product);
         selectedProduct.setShoppingCart(shoppingCart);
 
+//        SelectedProduct selectedProduct1 = buildProduct(selectedProductDto, product, shoppingCart);
         selectedProductRepository.save(selectedProduct);
     }
 
@@ -47,11 +53,15 @@ public class ShoppingCartService {
         selectedProduct.setQuantity(Integer.valueOf(selectedProductDto.getQuantity()));
         selectedProduct.setProduct(product);
         selectedProduct.setShoppingCart(shoppingCart);
+        return selectedProduct;
     }
 
     public ShoppingCartDto getShoppingCartDto(String authentificatedEmail) {
-        return  null;
-        //TODO:
+        ShoppingCart shoppingCart = shoppingCartRepository.findByUserEmailAddress(authentificatedEmail);
+        ShoppingCartDto shoppingCartDto = shoppingCartMapper.map(shoppingCart);
+
+        return  shoppingCartDto;
+
 
     }
 }

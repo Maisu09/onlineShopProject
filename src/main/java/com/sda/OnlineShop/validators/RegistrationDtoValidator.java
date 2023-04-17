@@ -27,9 +27,6 @@ public class RegistrationDtoValidator {
         if (!(registrationDto.getPassword().equals(registrationDto.getConfirmPassword()))) {
             FieldError fieldError = new FieldError("registrationDto", "confirmPassword", "The passwords do not match");
             bindingResult.addError(fieldError);
-
-
-
         }
 
     }
