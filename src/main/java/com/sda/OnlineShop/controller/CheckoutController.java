@@ -18,6 +18,7 @@ public class CheckoutController {
     ){
         ShoppingCartDto shoppingCartDto = shoppingCartService.getShoppingCartDto(authentication.getName());
         model.addAttribute("shoppingCartDto", shoppingCartDto);
+        System.out.println(shoppingCartDto);
         return "checkout";
     }
 
