@@ -23,8 +23,8 @@ public class ShoppingCartMapper {
 
         shoppingCartDto.setSelectedProductDtos(selectedProductDtoList);
         shoppingCartDto.setSubtotal(String.valueOf(subtotal));
-        shoppingCartDto.setShipping("50$");
-        shoppingCartDto.setTotal(String.valueOf(subtotal + 50));
+        shoppingCartDto.setShipping("10RON");
+        shoppingCartDto.setTotal(String.valueOf(subtotal + 10));
         return shoppingCartDto;
     }
 

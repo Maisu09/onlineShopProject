@@ -5,19 +5,22 @@ import com.sda.OnlineShop.dto.ProductDto;
 import com.sda.OnlineShop.dto.RegistrationDto;
 import com.sda.OnlineShop.dto.SelectedProductDto;
 import com.sda.OnlineShop.dto.ShoppingCartDto;
-import com.sda.OnlineShop.service.OrderService;
-import com.sda.OnlineShop.service.ProductService;
-import com.sda.OnlineShop.service.RegistrationService;
-import com.sda.OnlineShop.service.ShoppingCartService;
+import com.sda.OnlineShop.entities.User;
+import com.sda.OnlineShop.service.*;
 import com.sda.OnlineShop.validators.RegistrationDtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +36,8 @@ public class MainController {
     private ShoppingCartService shoppingCartService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @GetMapping("/addProduct")
     public String addProductGet(Model model) {
@@ -117,9 +122,22 @@ public class MainController {
     }
 
     @PostMapping("/confirmation")
-    public String launchOrderPost(Authentication authentication) {
+    public String launchOrderPost(Authentication authentication, Model model) {
 
         orderService.launchOrder(authentication.getName());
+        ShoppingCartDto shoppingCartDto = shoppingCartService.getShoppingCartDto(authentication.getName());
+        model.addAttribute("shoppingCartDto", shoppingCartDto);
+//        System.out.println(shoppingCartDto);
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(authentication.getName());
+//        model.addAttribute("userDetails", userDetails);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+
+        User user = userDetailsService.getCurrentUserConfimation(authentication.getName());
+        model.addAttribute("user", user);
+        model.addAttribute("dtf", dtf);
+        model.addAttribute("now", now);
         return "confirmation";
     }
 }
